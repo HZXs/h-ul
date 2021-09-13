@@ -18,6 +18,29 @@ yarn serve
 yarn lib
 ```
 
+#### 更新版本号
+
+```javascript
+npm version patch //表示修订号, 做了向下兼容的问题修正时需要更新
+npm version minor //表示次版本号，做了向下兼容的功能性需求时需要更新
+npm version major //表示主版本号，做了不兼容的API修改时需要更新
+```
+
+#### 发布到npm
+
+```javascript
+// 本地编译组件库代码
+yarn lib
+// 登录
+ npm login
+ // 发布
+ npm publish
+ // 如果发布失败提示权限问题,请执行以下命令
+ npm publish --access public
+```
+
+
+
 #### 项目结构
 
 ```javascript
@@ -33,10 +56,10 @@ yarn lib
 │
 ├─lib //打包目录
 │      demo.html
-│      xui.common.js
-│      xui.css
-│      xui.umd.js
-│      xui.umd.min.js
+│      hui.common.js
+│      hui.css
+│      hui.umd.js
+│      hui.umd.min.js
 │
 ├─packages //组件目录
 │  │  components.js //组件的列表js文件
@@ -53,4 +76,3 @@ yarn lib
         favicon.ico
         index.html 入口页面
 ```
-

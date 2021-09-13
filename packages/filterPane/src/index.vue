@@ -34,23 +34,57 @@
           </el-select>
         </template>
         <!-- 时间选择器 -->
-        <template v-if="item.timeSelect">
-          <el-time-select
+        <template v-if="item.isTime">
+          <el-time-picker
+            :size="item.size ? item.size : 'small'"
+            :is-range="item.isRange"
+            arrow-control
+            v-model="listQuery[item.key]"
+            :style="{ width: item.width ? item.width + 'px' : '200px' }"
+            :placeholder="item.placeholder"
+            :range-separator="item.separator ? item.separator : '至'"
+            :start-placeholder="item.startPlaceholder"
+            :end-placeholder="item.endPlaceholder"
+            :picker-options="item.pickerOptions ? item.pickerOptions : {}"
+          ></el-time-picker>
+        </template>
+        <!-- 日期选择器 -->
+        <template v-if="item.isDate">
+          <el-date-picker
+            :type="item.isRange ? 'daterange' : 'date'"
             :size="item.size ? item.size : 'small'"
             v-model="listQuery[item.key]"
             :style="{ width: item.width ? item.width + 'px' : '200px' }"
             :placeholder="item.placeholder"
-            :picker-options="item.pickerOptions"
-          ></el-time-select>
+            :range-separator="item.separator ? item.separator : '至'"
+            :start-placeholder="item.startPlaceholder"
+            :end-placeholder="item.endPlaceholder"
+            :picker-options="item.pickerOptions ? item.pickerOptions : {}"
+          ></el-date-picker>
         </template>
-        <!-- 日期选择器 -->
-        <template v-if="item.isdate">
+        <!-- 日期时间选择器 -->
+        <template v-if="item.isDateTime">
           <el-date-picker
+            :type="item.isRange ? 'datetimerange' : 'datetime'"
             :size="item.size ? item.size : 'small'"
             v-model="listQuery[item.key]"
             :style="{ width: item.width ? item.width + 'px' : '200px' }"
-            :picker-options="item.pickerOptions"
+            :placeholder="item.placeholder"
+            :range-separator="item.separator ? item.separator : '至'"
+            :start-placeholder="item.startPlaceholder"
+            :end-placeholder="item.endPlaceholder"
+            :picker-options="item.pickerOptions ? item.pickerOptions : {}"
           ></el-date-picker>
+        </template>
+        <template v-if="item.isBut">
+          <el-button
+            v-for="(i, keys) in item.option"
+            :size="item.size ? item.size : 'small'"
+            :type="item.type"
+            :key="keys"
+            @click="i['click']"
+            >{i.name}}</el-button
+          >
         </template>
       </el-form-item>
     </el-form>
@@ -70,6 +104,24 @@ export default {
       //表单的数据
       listQuery: {},
     };
+  },
+  watch: {
+    filterData: {
+      handler(newValue) {
+        if (newValue.length > 0) {
+          newValue.map((x) => {
+            this.listQuery[x.key] = "";
+          });
+        }
+      },
+      deep: true,
+    },
+    listQuery: {
+      handler(newValue) {
+        this.$emit("filterMsg", newValue);
+      },
+      deep: true,
+    },
   },
 };
 </script>
