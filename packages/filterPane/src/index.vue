@@ -34,7 +34,24 @@
           </el-select>
         </template>
         <!-- 时间选择器 -->
-        <template v-if="item.timeSelect"></template>
+        <template v-if="item.timeSelect">
+          <el-time-select
+            :size="item.size ? item.size : 'small'"
+            v-model="listQuery[item.key]"
+            :style="{ width: item.width ? item.width + 'px' : '200px' }"
+            :placeholder="item.placeholder"
+            :picker-options="item.pickerOptions"
+          ></el-time-select>
+        </template>
+        <!-- 日期选择器 -->
+        <template v-if="item.isdate">
+          <el-date-picker
+            :size="item.size ? item.size : 'small'"
+            v-model="listQuery[item.key]"
+            :style="{ width: item.width ? item.width + 'px' : '200px' }"
+            :picker-options="item.pickerOptions"
+          ></el-date-picker>
+        </template>
       </el-form-item>
     </el-form>
   </div>

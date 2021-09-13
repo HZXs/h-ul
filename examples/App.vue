@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h-button type="dashed">测试</h-button>
     <router-view />
   </div>
 </template>

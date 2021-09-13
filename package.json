@@ -22,9 +22,9 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/HzxTom/h-ui.git"
+    "url": "git+https://github.com/HZXs/h-ul.git"
   },
-  "main": "lib/xui.umd.min.js",
+  "main": "lib/hui.umd.min.js",
   "private": false,
   "dependencies": {
     "compression-webpack-plugin": "^8.0.1",
