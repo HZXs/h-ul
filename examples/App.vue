@@ -37,12 +37,33 @@ export default {
           key: "create_time",
           name: "创建时间：",
           isTime: true,
-          isRange: false,
+          isRange: true,
           width: 300,
           placeholder: "请选择创建时间",
           startPlaceholder: "请选择开始时间",
           endPlaceholder: "请选择结束时间",
           pickerOptions: {},
+        },
+        {
+          isBut: true,
+          option: [
+            {
+              size: "mini",
+              type: "primary",
+              name: "搜索",
+              click: () => {
+                alert("11111");
+              },
+            },
+            {
+              size: "mini",
+              type: "danger",
+              name: "删除",
+              click: () => {
+                alert("删除");
+              },
+            },
+          ],
         },
       ],
     };

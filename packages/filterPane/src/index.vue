@@ -79,11 +79,11 @@
         <template v-if="item.isBut">
           <el-button
             v-for="(i, keys) in item.option"
-            :size="item.size ? item.size : 'small'"
-            :type="item.type"
+            :size="i.size ? i.size : 'small'"
+            :type="i.type"
             :key="keys"
             @click="i['click']"
-            >{i.name}}</el-button
+            >{{ i.name }}</el-button
           >
         </template>
       </el-form-item>
