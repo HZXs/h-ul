@@ -45,6 +45,7 @@
             :is-range="item.isRange"
             arrow-control
             v-model="listQuery[item.key]"
+            :value-format="item.valueFormat ? item.valueFormat : 'HH:mm:ss'"
             :style="{ width: item.width ? item.width + 'px' : '200px' }"
             :placeholder="item.placeholder"
             :range-separator="item.separator ? item.separator : '至'"
@@ -59,6 +60,9 @@
             :type="item.isRange ? 'daterange' : 'date'"
             :size="item.size ? item.size : 'small'"
             v-model="listQuery[item.key]"
+            :value-format="
+              item.valueFormat ? item.valueFormat : 'yyyy-MM-dd HH:mm:ss'
+            "
             :style="{ width: item.width ? item.width + 'px' : '200px' }"
             :placeholder="item.placeholder"
             :range-separator="item.separator ? item.separator : '至'"
@@ -73,6 +77,9 @@
             :type="item.isRange ? 'datetimerange' : 'datetime'"
             :size="item.size ? item.size : 'small'"
             v-model="listQuery[item.key]"
+            :value-format="
+              item.valueFormat ? item.valueFormat : 'yyyy-MM-dd HH:mm:ss'
+            "
             :style="{ width: item.width ? item.width + 'px' : '200px' }"
             :placeholder="item.placeholder"
             :range-separator="item.separator ? item.separator : '至'"
