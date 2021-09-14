@@ -91,17 +91,9 @@ export default {
             {
               size: "mini",
               type: "primary",
-              name: "搜索",
+              name: "导出",
               click: () => {
                 alert("11111");
-              },
-            },
-            {
-              size: "mini",
-              type: "danger",
-              name: "删除",
-              click: () => {
-                alert("删除");
               },
             },
           ],

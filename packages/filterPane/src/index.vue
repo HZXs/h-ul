@@ -81,7 +81,7 @@
             :picker-options="item.pickerOptions ? item.pickerOptions : {}"
           ></el-date-picker>
         </template>
-        <template v-if="item.isBut">
+        <!-- <template v-if="item.isBut">
           <el-button
             v-for="(i, keys) in item.option"
             :size="i.size ? i.size : 'small'"
@@ -90,7 +90,13 @@
             @click="i['click']"
             >{{ i.name }}</el-button
           >
-        </template>
+        </template> -->
+      </el-form-item>
+      <el-form-item>
+        <el-button size="mini" type="primary" @click="handleSearch"
+          >搜索</el-button
+        >
+        <el-button size="mini" type="info" @click="handleRest">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -122,11 +128,23 @@ export default {
       },
       deep: true,
     },
-    listQuery: {
-      handler(newValue) {
-        this.$emit("filterMsg", newValue);
-      },
-      deep: true,
+  },
+  methods: {
+    handleSearch() {
+      const data = JSON.parse(JSON.stringify(this.listQuery));
+      Object.keys(data).forEach(function (key) {
+        if (data[key] === "") {
+          delete data[key];
+        }
+      });
+      this.$emit("filterMsg", data);
+    },
+    handleRest() {
+      const data = JSON.parse(JSON.stringify(this.listQuery));
+      Object.keys(data).forEach(function (key) {
+        data[key] = "";
+      });
+      this.listQuery = data;
     },
   },
 };
