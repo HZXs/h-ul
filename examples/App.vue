@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <h-button type="dashed">测试</h-button>
-    <filter-pane :filterData="filterData" @filterMsg="filterMsg"></filter-pane>
+    <filter-pane
+      :filterData="filterData"
+      labelWidth="130px"
+      @filterMsg="filterMsg"
+    ></filter-pane>
     <router-view />
   </div>
 </template>
@@ -34,9 +38,46 @@ export default {
         },
         {
           size: "mini",
+          key: "status",
+          name: "是否启用",
+          isSelect: true,
+          width: 200,
+          placeholder: "请选择启用状态",
+          props: { label: "label", value: "value" },
+          option: [
+            { label: "已启用", value: 1 },
+            { label: "已禁用", value: 2 },
+          ],
+        },
+        {
+          size: "mini",
           key: "create_time",
           name: "创建时间：",
           isTime: true,
+          isRange: true,
+          width: 300,
+          placeholder: "请选择创建时间",
+          startPlaceholder: "请选择开始时间",
+          endPlaceholder: "请选择结束时间",
+          pickerOptions: {},
+        },
+        {
+          size: "mini",
+          key: "start_time",
+          name: "生效时间：",
+          isDate: true,
+          isRange: true,
+          width: 300,
+          placeholder: "请选择生效时间",
+          startPlaceholder: "请选择开始时间",
+          endPlaceholder: "请选择结束时间",
+          pickerOptions: {},
+        },
+        {
+          size: "mini",
+          key: "end_time",
+          name: "创建时间：",
+          isDateTime: true,
           isRange: true,
           width: 300,
           placeholder: "请选择创建时间",

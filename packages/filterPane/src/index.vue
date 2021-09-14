@@ -1,10 +1,15 @@
 <template>
   <div>
-    <el-form inline>
+    <el-form
+      inline
+      :label-width="labelWidth ? labelWidth : 'auto'"
+      style="width: 100%; display: flex; flex-wrap: wrap"
+    >
       <el-form-item
         v-for="(item, index) in filterData"
         :key="index"
         :label="item.name"
+        style="display: flex"
       >
         <!-- 输入框 -->
         <template v-if="item.isInput">
@@ -98,6 +103,7 @@ export default {
       type: Array,
       default: () => [],
     },
+    labelWidth: String,
   },
   data() {
     return {
