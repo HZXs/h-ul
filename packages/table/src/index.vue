@@ -43,6 +43,37 @@
         </template>
       </el-table-column>
     </el-table>
+    <div
+      class="pagination-flex"
+      :style="{ justifyContent: dataSource.pageData.isCenter ? 'center' : '' }"
+    >
+      <!-- 分页 -->
+      <template v-if="dataSource.pageData">
+        <el-pagination
+          :background="dataSource.pageData.isBackground"
+          layout="prev, pager, next"
+          :total="dataSource.pageData.total"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="dataSource.pageData.pageNum"
+          :page-size="dataSource.pageData.pageSize"
+          v-if="!dataSource.pageData.isAll"
+        >
+        </el-pagination>
+        <el-pagination
+          :background="dataSource.pageData.isBackground"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="dataSource.pageData.total"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="dataSource.pageData.pageNum"
+          :page-size="dataSource.pageData.pageSize"
+          :page-sizes="dataSource.pageData.pageSizes"
+          v-if="dataSource.pageData.isAll"
+        >
+        </el-pagination>
+      </template>
+    </div>
   </div>
 </template>
 <script>
@@ -56,5 +87,23 @@ export default {
   data() {
     return {};
   },
+  methods: {
+    //切换每页条数
+    handleSizeChange(val) {
+      this.$emit("handleSizeChange", val);
+    },
+    //切换页码
+    handleCurrentChange(val) {
+      this.$emit("handleCurrentChange", val);
+    },
+  },
 };
 </script>
+<style lang="scss" scoped>
+.pagination-flex {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+</style>

@@ -6,7 +6,11 @@
       labelWidth="auto"
       @filterMsg="filterMsg"
     ></filter-pane>
-    <table-pane :dataSource="dataSource"></table-pane>
+    <table-pane
+      :dataSource="dataSource"
+      @handleSizeChange="handleSizeChange"
+      @handleCurrentChange="handleCurrentChange"
+    ></table-pane>
     <router-view />
   </div>
 </template>
@@ -141,12 +145,28 @@ export default {
             },
           },
         ],
+        //分页
+        pageData: {
+          total: 10, // 总条数
+          pageSize: 10, // 每页数量
+          pageNum: 1, // 页码
+          isBackground: true, //是否开启背景色
+          isAll: true, //是否使用完整功能
+          isCenter: true, //分页是否居中
+          pageSizes: [5, 10, 15, 20], // 每页数量数组（可选，isAll为true时必须设置）
+        },
       },
     };
   },
   methods: {
     filterMsg(data) {
       console.log("值", data);
+    },
+    handleCurrentChange(val) {
+      console.log("页码", val);
+    },
+    handleSizeChange(val) {
+      console.log("每页条数", val);
     },
   },
 };
