@@ -2,6 +2,7 @@
   <div id="app">
     <h-button type="dashed">测试</h-button>
     <filter-pane
+      ref="filterPane"
       :filterData="filterData"
       labelWidth="auto"
       @filterMsg="filterMsg"
@@ -95,6 +96,21 @@ export default {
           startPlaceholder: "请选择开始时间",
           endPlaceholder: "请选择结束时间",
           pickerOptions: {},
+        },
+        {
+          size: "mini",
+          isBut: true,
+          option: [
+            {
+              size: "mini",
+              type: "primary",
+              name: "搜索",
+              handleClick: (val) => {
+                this.$refs.filterPane.listQuery = {};
+                console.log(val);
+              },
+            },
+          ],
         },
       ],
       dataSource: {

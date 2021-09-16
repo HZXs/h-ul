@@ -88,22 +88,16 @@
             :picker-options="item.pickerOptions ? item.pickerOptions : {}"
           ></el-date-picker>
         </template>
-        <!-- <template v-if="item.isBut">
+        <template v-if="item.isBut">
           <el-button
             v-for="(i, keys) in item.option"
             :size="i.size ? i.size : 'small'"
             :type="i.type"
             :key="keys"
-            @click="i['click']"
+            @click="i['handleClick'](listQuery)"
             >{{ i.name }}</el-button
           >
-        </template> -->
-      </el-form-item>
-      <el-form-item>
-        <el-button size="mini" type="primary" @click="handleSearch"
-          >搜索</el-button
-        >
-        <el-button size="mini" type="info" @click="handleRest">重置</el-button>
+        </template>
       </el-form-item>
     </el-form>
   </div>
@@ -135,24 +129,15 @@ export default {
       },
       deep: true,
     },
-  },
-  methods: {
-    handleSearch() {
-      const data = JSON.parse(JSON.stringify(this.listQuery));
-      Object.keys(data).forEach(function (key) {
-        if (data[key] === "") {
-          delete data[key];
+    listQuery: {
+      handler(newValue) {
+        if (Object.keys(newValue).length) {
+          this.$emit("filterMsg", newValue);
         }
-      });
-      this.$emit("filterMsg", data);
-    },
-    handleRest() {
-      const data = JSON.parse(JSON.stringify(this.listQuery));
-      Object.keys(data).forEach(function (key) {
-        data[key] = "";
-      });
-      this.listQuery = data;
+      },
+      deep: true,
     },
   },
+  methods: {},
 };
 </script>

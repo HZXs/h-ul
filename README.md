@@ -158,6 +158,21 @@ Vue.use(hui);
           endPlaceholder: "请选择结束时间",
           pickerOptions: {},//当前时间日期选择器特有的选项 参考element的DateTimePicker 组件
         },
+         {
+          size: "mini",
+          isBut: true,
+          option: [
+            {
+              size: "mini",
+              type: "primary", //按钮样式
+              name: "搜索", //按钮文案
+              handleClick: (val) => {
+                this.$refs.filterPane.listQuery = {};
+                console.log(val);
+              },
+            },
+          ],
+        },         
       ],
 ```
 
@@ -165,6 +180,7 @@ Vue.use(hui);
 
 ```javascript
     <filter-pane
+      ref="filterPane"
       :filterData="filterData"
       labelWidth="auto"
       @filterMsg="filterMsg"
