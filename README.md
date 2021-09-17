@@ -160,8 +160,8 @@ Vue.use(hui);
         },
          {
           size: "mini",
-          isBut: true,
-          option: [
+          isBut: true, //开启按钮
+          option: [ //按钮数组
             {
               size: "mini",
               type: "primary", //按钮样式
