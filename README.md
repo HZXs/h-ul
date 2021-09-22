@@ -1,102 +1,33 @@
-# h-ui
+## vue-assembly
 
-#### **安装依赖**
+## ![](https://badge.fury.io/js/vue-assembly.svg)
 
-```javascript
-yarn install
-```
+### UI 组件使用
 
-#### **启动项目**
+ui 组件都封装到了 vue-assembly,下载 UI
 
 ```javascript
-yarn serve
+npm install vue-assembly
 ```
 
-#### **项目打包**
+在 main.js 中写入以下内容：
 
 ```javascript
-yarn lib
+import zyUI from "vue-assembly";
+import "vue-assembly/lib/h-ui.css";
+Vue.use(zyUI);
 ```
 
-#### 更新版本号
+#### 1、filterPane 搜索组件
 
-```javascript
-npm version patch //表示修订号, 做了向下兼容的问题修正时需要更新
-npm version minor //表示次版本号，做了向下兼容的功能性需求时需要更新
-npm version major //表示主版本号，做了不兼容的API修改时需要更新
-```
-
-#### 发布到npm
-
-```javascript
-// 本地编译组件库代码
-yarn lib
-// 登录
- npm login
- // 发布
- npm publish
- // 如果发布失败提示权限问题,请执行以下命令
- npm publish --access public
-```
-
-
-
-#### 项目结构
-
-```javascript
-├─.vscode
-│      settings.json //代码格式化配置
-│
-├─examples
-│  │  App.vue
-│  │  main.js //入口js文件
-│  │
-│  └─assets //静态资源
-│          logo.png
-│
-├─lib //打包目录
-│      demo.html
-│      hui.common.js
-│      hui.css
-│      hui.umd.js
-│      hui.umd.min.js
-│
-├─packages //组件目录
-│  │  components.js //组件的列表js文件
-│  │  index.js //组件的入口js文件
-│  │
-│  ├─button //组件文件
-│  │  │  index.js //组件js
-│  │  │
-│  │  └─src
-│  │          index.vue //组件页面
-│  │
-│
-└─public
-        favicon.ico
-        index.html 入口页面
-```
-
-#### 组件库使用
-
-在main.js中写入以下内容：
-
-```javascript
-import hui from "vue-assembly";
-import "vue-assembly/lib/hui.css";
-Vue.use(hui);
-```
-
-#### filterPane 搜索组件
-
-搜索层一般包括日期选择器、输入框、select下拉选择器等+搜索功能、重置功能
+搜索层一般包括日期选择器、输入框、select 下拉选择器等+搜索功能、重置功能
 
 ##### 传入数据结构整理
 
 ```JavaScript
       filterData: [
         {
-          size: "mini", //组件大小 可选size small 
+          size: "mini", //组件大小 可选size small
           key: "name", //字段名
           name: "用户名：", //提示语
           isInput: true, //是否为输入框
@@ -123,7 +54,7 @@ Vue.use(hui);
           isTime: true, //是否为时间组件
           isRange: true, //是否开启区间选择
           width: 300,
-          valueFormat: "HH:mm:ss", //绑定值的日期格式  
+          valueFormat: "HH:mm:ss", //绑定值的日期格式
           placeholder: "请选择创建时间", //placeholder提示语
           startPlaceholder: "请选择开始时间", //范围选择时开始日期的占位内容 (只要为区间选择器才有效)
           endPlaceholder: "请选择结束时间",//范围选择时结束日期的占位内容 (只要为区间选择器才有效)
@@ -136,10 +67,10 @@ Vue.use(hui);
           isDate: true, //是否为日期选择器
           isYear:true, //是否为年选择器 （周，月，年只能存在一个）
           isWeek:true, // 是否为周选择器 （周，月，年只能存在一个）
-          isMonth:true, //是否为月选择器 （周，月，年只能存在一个）  
+          isMonth:true, //是否为月选择器 （周，月，年只能存在一个）
           isRange: true, //是否为区间选择器
           width: 300,
-          valueFormat: "yyyy-MM-dd HH:mm:ss", //绑定值的日期格式            
+          valueFormat: "yyyy-MM-dd HH:mm:ss", //绑定值的日期格式
           placeholder: "请选择生效时间",
           startPlaceholder: "请选择开始时间",
           endPlaceholder: "请选择结束时间",
@@ -152,7 +83,7 @@ Vue.use(hui);
           isDateTime: true, //是否为日期时间选择器
           isRange: true,
           width: 300,
-          valueFormat: "yyyy-MM-dd HH:mm:ss", //绑定值的日期格式            
+          valueFormat: "yyyy-MM-dd HH:mm:ss", //绑定值的日期格式
           placeholder: "请选择创建时间",
           startPlaceholder: "请选择开始时间",
           endPlaceholder: "请选择结束时间",
@@ -172,7 +103,7 @@ Vue.use(hui);
               },
             },
           ],
-        },         
+        },
       ],
 ```
 
@@ -191,7 +122,9 @@ Vue.use(hui);
     },
 ```
 
-#### tablePane table组件
+#### 2、tablePane 表格组件
+
+tablePane 组件，可快速构建带分页的表格
 
 ##### 传入数据结构整理
 
@@ -231,7 +164,7 @@ Vue.use(hui);
             label: "编辑", //按钮的名称
             class: "", //按钮新增的class（可选）
             style: "", //按钮的样式 （可选）
-            isEdit: true, //是否要权限
+            isEdit: true, //是否有权限
             isShow: (val) => {
               //可选
               //是否显示按钮
@@ -274,3 +207,61 @@ Vue.use(hui);
     },
 ```
 
+#### 3、dialog 弹窗
+
+```javascript
+    <zy-dialog
+      title="测试"
+      :show.sync="showDialog"
+      :before-close="close"
+      :model="false"
+      :show-close="true"
+      :close-on-click-modal="true"
+    >
+      <div>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </div>
+      <span slot="footer" style="display: block">
+        <zy-button type="primary">测试</zy-button>
+        <zy-button type="primary">测试</zy-button>
+      </span>
+    </zy-dialog>
+```
+
+属性
+
+| 参数                 | 描述                           | 类型                               | 可选值 | 默认值 |
+| -------------------- | ------------------------------ | ---------------------------------- | ------ | ------ |
+| title                | 标题                           | string                             | -      | -      |
+| show                 | 控制弹窗的状态                 | boolean                            | -      | false  |
+| width                | 弹窗的宽度                     | string                             | -      | 30%    |
+| before-close         | 关闭前的回调，会暂停弹窗的关闭 | function(done)，done 用于关闭 弹窗 | -      | -      |
+| modal                | 是否需要遮盖层                 | boolean                            | false  | true   |
+| custom-class         | 弹窗自定义 class 名            | string                             | -      | -      |
+| close-on-click-modal | 是否可通过点击遮盖层关闭弹窗   | boolean                            | false  | true   |
+| show-close           | 是否现在关闭按钮               | boolean                            | false  | true   |
+
+Slot
+
+| name   | 描述                 |
+| ------ | -------------------- |
+| footer | 弹窗按钮操作区域内容 |
+
+#### 4、按钮
+
+```javascript
+    <zy-button size="large"> 默认 </zy-button>
+    <zy-button type="primary" size="small">主按钮</zy-button>
+    <zy-button type="dashed" :disabled="true" size="mini">虚线按钮</zy-button>
+    <zy-button type="danger" :disabled="true" :round="true"> 危险 </zy-button>
+    <zy-button type="text">链接按钮</zy-button>
+```
+
+| 参数     | 描述           | 类型    | 可选值                                                 | 默认值 |
+| -------- | -------------- | ------- | ------------------------------------------------------ | ------ |
+| size     | 按钮尺寸       | string  | small（小型）/large（大型）/mini（迷你）               | -      |
+| type     | 按钮类型       | string  | primary(主要按钮)/dashed(虚线)/danger(危险)/text(链接) | -      |
+| disabled | 禁用状态       | boolean | -                                                      | false  |
+| round    | 是否为圆形按钮 | boolean | -                                                      | false  |
