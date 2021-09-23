@@ -1,13 +1,13 @@
 module.exports = {
   vueTemplate: (compoenntName) => {
     return `<template>
-  <div class="${compoenntName}">
+  <div id="${compoenntName}">
       ${compoenntName}组件
   </div>
 </template>
 <script>
 export default {
-  name: '${compoenntName}',
+  name: "${compoenntName}",
   components: {},
   props: {},
   data() {

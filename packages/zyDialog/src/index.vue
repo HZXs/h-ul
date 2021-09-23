@@ -3,13 +3,11 @@
     <div class="zy-dialog" v-show="closed" :style="{ zIndex: zIndex }">
       <div
         class="dialog-mark"
-        @click.self="closeOnClickModal ? closeMyself() : ''"
+        @click.self="closeMyself"
         :style="{ 'z-index': zIndex + 1 }"
-        v-if="modal"
       ></div>
       <div
         class="zy-dialog-sprite"
-        :class="customClass"
         :style="{
           width: width ? width : '30%',
           transformOrigin: `-10% ${width ? width : '30%'}`,
@@ -19,7 +17,7 @@
         <!-- 标题 -->
         <section v-if="title" class="header">{{ title }}</section>
         <!-- 关闭按钮 -->
-        <button class="zy-modal-close" v-if="showClose" @click="handleClose">
+        <button class="zy-modal-close" @click="handleClose">
           <span class="zy-modal-close-x">
             <i class="anticon">
               <svg
@@ -55,25 +53,19 @@
 export default {
   name: "zyDialog",
   props: {
-    title: String,
-    width: String,
+    title: {
+      type: String,
+      default: "",
+    },
+    width: {
+      type: String,
+    },
     show: {
       type: Boolean,
       default: false,
     },
-    beforeClose: Function,
-    modal: {
-      type: Boolean,
-      default: true,
-    },
-    customClass: String,
-    showClose: {
-      type: Boolean,
-      default: true,
-    },
-    closeOnClickModal: {
-      type: Boolean,
-      default: true,
+    beforeClose: {
+      type: Function,
     },
   },
   data() {

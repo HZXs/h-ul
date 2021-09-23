@@ -14,7 +14,7 @@ npm install vue-assembly
 
 ```javascript
 import zyUI from "vue-assembly";
-import "vue-assembly/lib/h-ui.css";
+import "vue-assembly/lib/zy-ui.css";
 Vue.use(zyUI);
 ```
 
@@ -265,3 +265,40 @@ Slot
 | type     | 按钮类型       | string  | primary(主要按钮)/dashed(虚线)/danger(危险)/text(链接) | -      |
 | disabled | 禁用状态       | boolean | -                                                      | false  |
 | round    | 是否为圆形按钮 | boolean | -                                                      | false  |
+
+#### 5、无限加载列表（带下拉）
+
+滚动加载，用于展示长列表，当列表即将滚动到底部时，会触发事件并加载更多列表项，理论流畅展示数据为10w条。
+
+```javascript
+    <zy-virtual-list
+      :data="list"
+      :loading="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="getData"
+    > 
+         <!-- 展示的内容放置区域 row为循环列表的数据 !-->
+      <template v-slot:content="{ row }">
+        <div class="item">
+            {{row.name}}
+        </div>
+      </template>
+    </zy-virtual-list>
+```
+
+| 参数          | 描述                                         | 类型    | 可选值 | 默认值     |
+| ------------- | -------------------------------------------- | ------- | ------ | ---------- |
+| data          | 显示的数据                                   | array   | -      | -          |
+| loading       | 是否处于加载状态，加载过程中不触发`load`事件 | boolean | -      | false      |
+| finished      | 是否已经加载状态                             | boolean | -      | false      |
+| finished-text | 加载完成之后的文本描述                       | string  | -      | 已经到底了 |
+
+events
+
+| 事件 | 描述             | 回调参数 |
+| ---- | ---------------- | -------- |
+| load | 滚动条触底时触发 | -        |
+
+
+
